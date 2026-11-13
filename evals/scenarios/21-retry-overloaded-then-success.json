@@ -1,0 +1,21 @@
+{
+  "name": "retry-overloaded-then-success",
+  "description": "Overloaded responses are retried with backoff",
+  "prompt": "Hello",
+  "script": [
+    {
+      "error": 529
+    },
+    {
+      "error": 529
+    },
+    {
+      "text": "Hello!"
+    }
+  ],
+  "expect": {
+    "terminated_by": "end_turn",
+    "http_calls": 3,
+    "retries": 2
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "name": "budget-turns",
+  "description": "The turn limit stops a model that keeps calling tools",
+  "prompt": "Keep checking orders",
+  "script": [
+    {
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1001"
+          }
+        }
+      ]
+    },
+    {
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1002"
+          }
+        }
+      ]
+    },
+    {
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1003"
+          }
+        }
+      ]
+    }
+  ],
+  "expect": {
+    "terminated_by": "budget:max_turns",
+    "turns": 3,
+    "http_calls": 3
+  },
+  "budget": {
+    "max_turns": 3
+  }
+}

@@ -1,0 +1,11 @@
+# PLACEHOLDER PRICES. These numbers are not real. Replace them with the rates on your own
+# pricing page or enterprise agreement before you trust any dollar figure the agent reports.
+# Prices are USD per million tokens. Multipliers apply to the input price.
+
+batch_discount = 0.0            # set to your batch discount, e.g. 0.5 if you get 50% off
+
+[models.claude-sonnet-5-5]
+input_per_mtok = 1.00           # PLACEHOLDER
+output_per_mtok = 5.00          # PLACEHOLDER
+cache_write_multiplier = 1.25   # verify for the TTL you use (5 minute vs 1 hour)
+cache_read_multiplier = 0.10    # verify

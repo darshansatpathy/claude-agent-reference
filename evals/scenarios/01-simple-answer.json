@@ -1,0 +1,19 @@
+{
+  "name": "simple-answer",
+  "description": "A plain answer needs one call and costs what the usage says",
+  "prompt": "Hello",
+  "script": [
+    {
+      "text": "Hello! How can I help?"
+    }
+  ],
+  "expect": {
+    "terminated_by": "end_turn",
+    "turns": 1,
+    "http_calls": 1,
+    "text_contains": [
+      "help"
+    ],
+    "cost_usd": 0.0002
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "max-tokens-truncation",
+  "description": "A truncated answer is reported as such, not as complete",
+  "prompt": "Write a long report",
+  "script": [
+    {
+      "text": "Part one of the",
+      "stop_reason": "max_tokens"
+    }
+  ],
+  "expect": {
+    "terminated_by": "max_tokens",
+    "http_calls": 1,
+    "text_contains": [
+      "Part one"
+    ]
+  }
+}

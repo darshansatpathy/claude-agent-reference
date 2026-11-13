@@ -1,0 +1,14 @@
+{
+  "name": "unexpected-stop-reason",
+  "description": "A stop reason this code does not know ends the run visibly",
+  "prompt": "Hello",
+  "script": [
+    {
+      "text": "hi",
+      "stop_reason": "something_new"
+    }
+  ],
+  "expect": {
+    "terminated_by": "unexpected_stop_reason:something_new"
+  }
+}

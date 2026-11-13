@@ -1,0 +1,27 @@
+{
+  "name": "unknown-tool",
+  "description": "A tool the model invents is refused with the list of real ones",
+  "prompt": "Delete everything",
+  "script": [
+    {
+      "tool_use": [
+        {
+          "name": "delete_everything",
+          "input": {}
+        }
+      ]
+    },
+    {
+      "text": "I cannot do that."
+    }
+  ],
+  "expect": {
+    "terminated_by": "end_turn",
+    "tool_outcomes": [
+      [
+        "delete_everything",
+        "unknown"
+      ]
+    ]
+  }
+}

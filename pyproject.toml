@@ -1,0 +1,66 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "claude-agent-reference"
+version = "0.1.0"
+description = "A dependency-free reference for a production-grade agent on the Claude API: retries, tool use with approval, budgets, prompt caching, batches, audit and hermetic evals."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+authors = [{ name = "Darshan Kumar Satpathy" }]
+keywords = ["claude", "anthropic", "ai-agents", "tool-use", "prompt-caching", "governance"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "License :: OSI Approved :: MIT License",
+  "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+  "ruff>=0.5",
+  "mypy>=1.10",
+  "pip-audit>=2.7",
+]
+
+[project.scripts]
+claude-agent = "claude_agent.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/claude_agent"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"evals" = "claude_agent/evals"
+"prices.example.toml" = "claude_agent/prices.example.toml"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["error::ResourceWarning"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S", "SIM", "RUF"]
+ignore = ["S101"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S", "B011", "E501"]
+"src/claude_agent/evals.py" = ["E501"]
+"src/claude_agent/sample_tools.py" = ["E501"]
+"src/claude_agent/audit.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+mypy_path = "src"
+packages = ["claude_agent"]

@@ -1,0 +1,40 @@
+{
+  "name": "tool-failure-reported",
+  "description": "A tool that raises is reported as an error, without a stack trace",
+  "prompt": "Refund 500 USD on A-1003",
+  "script": [
+    {
+      "tool_use": [
+        {
+          "name": "issue_refund",
+          "input": {
+            "order_id": "A-1003",
+            "amount": 500,
+            "reason": "test refund"
+          }
+        }
+      ]
+    },
+    {
+      "text": "The refund failed."
+    }
+  ],
+  "expect": {
+    "terminated_by": "end_turn",
+    "tool_outcomes": [
+      [
+        "issue_refund",
+        "error"
+      ]
+    ],
+    "state": {
+      "orders.A-1003.refunded": 0.0
+    },
+    "requests_contain": [
+      "failed: ValueError"
+    ]
+  },
+  "approve": [
+    "issue_refund"
+  ]
+}

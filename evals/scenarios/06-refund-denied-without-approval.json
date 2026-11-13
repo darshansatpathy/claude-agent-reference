@@ -1,0 +1,51 @@
+{
+  "name": "refund-denied-without-approval",
+  "description": "A write tool does nothing until a person approves it",
+  "prompt": "Refund 20 USD on A-1002, it arrived damaged.",
+  "script": [
+    {
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1002"
+          }
+        }
+      ]
+    },
+    {
+      "tool_use": [
+        {
+          "name": "issue_refund",
+          "input": {
+            "order_id": "A-1002",
+            "amount": 20,
+            "reason": "arrived damaged"
+          }
+        }
+      ]
+    },
+    {
+      "text": "A person must approve this refund first."
+    }
+  ],
+  "expect": {
+    "terminated_by": "end_turn",
+    "tool_outcomes": [
+      [
+        "lookup_order",
+        "ok"
+      ],
+      [
+        "issue_refund",
+        "denied"
+      ]
+    ],
+    "state": {
+      "orders.A-1002.refunded": 0.0
+    },
+    "text_contains": [
+      "approve"
+    ]
+  }
+}

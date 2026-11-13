@@ -1,0 +1,35 @@
+{
+  "name": "tool-roundtrip",
+  "description": "A tool result is fed back and the model finishes",
+  "prompt": "What is the status of order A-1001?",
+  "script": [
+    {
+      "text": "Let me check.",
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1001"
+          }
+        }
+      ]
+    },
+    {
+      "text": "Order A-1001 has shipped."
+    }
+  ],
+  "expect": {
+    "terminated_by": "end_turn",
+    "turns": 2,
+    "http_calls": 2,
+    "tool_outcomes": [
+      [
+        "lookup_order",
+        "ok"
+      ]
+    ],
+    "text_contains": [
+      "shipped"
+    ]
+  }
+}

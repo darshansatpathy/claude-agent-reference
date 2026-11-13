@@ -1,0 +1,18 @@
+{
+  "name": "transport-error-retried",
+  "description": "A dropped connection is retried",
+  "prompt": "Hello",
+  "script": [
+    {
+      "transport_error": "connection reset"
+    },
+    {
+      "text": "Hi!"
+    }
+  ],
+  "expect": {
+    "terminated_by": "end_turn",
+    "http_calls": 2,
+    "retries": 1
+  }
+}

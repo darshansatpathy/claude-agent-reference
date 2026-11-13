@@ -1,0 +1,44 @@
+{
+  "name": "invalid-input-recovers",
+  "description": "Schema-invalid tool input is reported to the model, which corrects itself",
+  "prompt": "Status of order 1001?",
+  "script": [
+    {
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "1001"
+          }
+        }
+      ]
+    },
+    {
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1001"
+          }
+        }
+      ]
+    },
+    {
+      "text": "It has shipped."
+    }
+  ],
+  "expect": {
+    "terminated_by": "end_turn",
+    "turns": 3,
+    "tool_outcomes": [
+      [
+        "lookup_order",
+        "invalid"
+      ],
+      [
+        "lookup_order",
+        "ok"
+      ]
+    ]
+  }
+}

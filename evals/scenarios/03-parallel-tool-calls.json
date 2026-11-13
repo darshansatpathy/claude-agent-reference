@@ -1,0 +1,40 @@
+{
+  "name": "parallel-tool-calls",
+  "description": "Two tool calls in one turn each get a result, tool_result blocks first",
+  "prompt": "Compare orders A-1001 and A-1002",
+  "script": [
+    {
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1001"
+          }
+        },
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1002"
+          }
+        }
+      ]
+    },
+    {
+      "text": "Both orders are on their way or delivered."
+    }
+  ],
+  "expect": {
+    "terminated_by": "end_turn",
+    "turns": 2,
+    "tool_outcomes": [
+      [
+        "lookup_order",
+        "ok"
+      ],
+      [
+        "lookup_order",
+        "ok"
+      ]
+    ]
+  }
+}

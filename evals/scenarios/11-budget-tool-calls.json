@@ -1,0 +1,50 @@
+{
+  "name": "budget-tool-calls",
+  "description": "Tool calls beyond the limit are blocked, and every tool_use still gets a result",
+  "prompt": "Check all orders",
+  "script": [
+    {
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1001"
+          }
+        },
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1002"
+          }
+        },
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1003"
+          }
+        }
+      ]
+    }
+  ],
+  "expect": {
+    "terminated_by": "budget:max_tool_calls",
+    "http_calls": 1,
+    "tool_outcomes": [
+      [
+        "lookup_order",
+        "ok"
+      ],
+      [
+        "lookup_order",
+        "ok"
+      ],
+      [
+        "lookup_order",
+        "blocked"
+      ]
+    ]
+  },
+  "budget": {
+    "max_tool_calls": 2
+  }
+}

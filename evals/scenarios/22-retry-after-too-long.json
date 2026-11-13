@@ -1,0 +1,18 @@
+{
+  "name": "retry-after-too-long",
+  "description": "A rate-limit wait longer than the cap is surfaced, not slept on",
+  "prompt": "Hello",
+  "script": [
+    {
+      "error": 429,
+      "headers": {
+        "retry-after": "120"
+      }
+    }
+  ],
+  "expect": {
+    "raises": "ApiError",
+    "raises_status": 429,
+    "http_calls": 1
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "name": "identical-call-loop",
+  "description": "Repeating the same call is blocked after the allowed number of times",
+  "prompt": "Check A-1001 until it changes",
+  "script": [
+    {
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1001"
+          }
+        }
+      ]
+    },
+    {
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1001"
+          }
+        }
+      ]
+    },
+    {
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1001"
+          }
+        }
+      ]
+    },
+    {
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1001"
+          }
+        }
+      ]
+    },
+    {
+      "text": "I will stop checking."
+    }
+  ],
+  "expect": {
+    "terminated_by": "end_turn",
+    "turns": 5,
+    "tool_outcomes": [
+      [
+        "lookup_order",
+        "ok"
+      ],
+      [
+        "lookup_order",
+        "ok"
+      ],
+      [
+        "lookup_order",
+        "blocked"
+      ],
+      [
+        "lookup_order",
+        "blocked"
+      ]
+    ]
+  },
+  "budget": {
+    "max_identical_calls": 2
+  }
+}

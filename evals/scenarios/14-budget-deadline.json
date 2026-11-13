@@ -1,0 +1,25 @@
+{
+  "name": "budget-deadline",
+  "description": "The wall-clock limit stops a slow run",
+  "prompt": "Check an order",
+  "script": [
+    {
+      "advance_s": 11,
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1001"
+          }
+        }
+      ]
+    }
+  ],
+  "expect": {
+    "terminated_by": "budget:deadline",
+    "http_calls": 1
+  },
+  "budget": {
+    "deadline_s": 10
+  }
+}

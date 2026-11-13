@@ -1,0 +1,15 @@
+{
+  "name": "auth-error-not-retried",
+  "description": "A credential error is never retried",
+  "prompt": "Hello",
+  "script": [
+    {
+      "error": 401
+    }
+  ],
+  "expect": {
+    "raises": "ApiError",
+    "raises_status": 401,
+    "http_calls": 1
+  }
+}

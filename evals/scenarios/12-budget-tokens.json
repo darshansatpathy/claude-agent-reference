@@ -1,0 +1,28 @@
+{
+  "name": "budget-tokens",
+  "description": "The token limit stops the run before the next model call",
+  "prompt": "Check an order",
+  "script": [
+    {
+      "usage": [
+        100,
+        60
+      ],
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-1001"
+          }
+        }
+      ]
+    }
+  ],
+  "expect": {
+    "terminated_by": "budget:max_total_tokens",
+    "http_calls": 1
+  },
+  "budget": {
+    "max_total_tokens": 150
+  }
+}

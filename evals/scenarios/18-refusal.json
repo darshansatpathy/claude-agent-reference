@@ -1,0 +1,15 @@
+{
+  "name": "refusal",
+  "description": "A refusal ends the run and is not retried",
+  "prompt": "Do something the model declines",
+  "script": [
+    {
+      "text": "I can't help with that.",
+      "stop_reason": "refusal"
+    }
+  ],
+  "expect": {
+    "terminated_by": "refusal",
+    "http_calls": 1
+  }
+}

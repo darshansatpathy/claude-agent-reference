@@ -1,0 +1,22 @@
+{
+  "name": "retries-exhausted",
+  "description": "Retries are bounded",
+  "prompt": "Hello",
+  "script": [
+    {
+      "error": 529
+    },
+    {
+      "error": 529
+    },
+    {
+      "error": 529
+    }
+  ],
+  "expect": {
+    "raises": "ApiError",
+    "raises_status": 529,
+    "http_calls": 3
+  },
+  "max_retries": 2
+}

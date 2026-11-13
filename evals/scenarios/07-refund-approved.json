@@ -1,0 +1,37 @@
+{
+  "name": "refund-approved",
+  "description": "With approval the same call goes through",
+  "prompt": "Refund 20 USD on A-1002, it arrived damaged.",
+  "script": [
+    {
+      "tool_use": [
+        {
+          "name": "issue_refund",
+          "input": {
+            "order_id": "A-1002",
+            "amount": 20,
+            "reason": "arrived damaged"
+          }
+        }
+      ]
+    },
+    {
+      "text": "Refunded 20 USD."
+    }
+  ],
+  "expect": {
+    "terminated_by": "end_turn",
+    "tool_outcomes": [
+      [
+        "issue_refund",
+        "ok"
+      ]
+    ],
+    "state": {
+      "orders.A-1002.refunded": 20.0
+    }
+  },
+  "approve": [
+    "issue_refund"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "max-tokens-mid-tool-call",
+  "description": "A tool call cut off by max_tokens is never executed",
+  "prompt": "Check an order",
+  "script": [
+    {
+      "tool_use": [
+        {
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A-10"
+          }
+        }
+      ],
+      "stop_reason": "max_tokens"
+    }
+  ],
+  "expect": {
+    "terminated_by": "max_tokens",
+    "tool_outcomes": [],
+    "http_calls": 1
+  }
+}

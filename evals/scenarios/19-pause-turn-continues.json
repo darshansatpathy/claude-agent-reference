@@ -1,0 +1,19 @@
+{
+  "name": "pause-turn-continues",
+  "description": "A paused turn is resumed by sending the history back unchanged",
+  "prompt": "Research and summarise",
+  "script": [
+    {
+      "text": "Working on it.",
+      "stop_reason": "pause_turn"
+    },
+    {
+      "text": "Here is the summary."
+    }
+  ],
+  "expect": {
+    "terminated_by": "end_turn",
+    "turns": 2,
+    "http_calls": 2
+  }
+}
