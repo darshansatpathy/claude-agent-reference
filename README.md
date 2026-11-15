@@ -135,6 +135,7 @@ The default model is `claude-sonnet-5-5`. Pin the model you have evaluated, set 
 - **Prices are placeholders** in `prices.example.toml`. Use your own.
 - **Not included:** streaming, async, provider abstraction, memory and multi-agent
   orchestration ([ADR 0001](docs/adr/0001-standard-library-client.md)).
+- Written and tested by an AI assistant (Claude) working with the repository owner; the design has not had an independent review.
 
 ## Documentation
 
